@@ -1,6 +1,22 @@
-from converters import to_html
 import unittest
 from collections import OrderedDict
+
+from converters import to_html
+from converters.to_html import get_tag_props
+
+
+class TestGetTagProps(unittest.TestCase):
+    def test_correct(self):
+        self.assertEqual(
+            ('div id="unique" class="green new"', 'div'),
+            get_tag_props('div.green.new#unique')
+        )
+
+    def test_shuffled(self):
+        self.assertEqual(
+            ('div id="unique" class="green new"', 'div'),
+            get_tag_props('div.green#unique.new')
+        )
 
 
 class TestToHTML(unittest.TestCase):
@@ -53,11 +69,11 @@ class TestToHTML(unittest.TestCase):
                         '<p>body 1</p>',
                     '</li>',
                     '<li>'
-                        '<h1>title 2</h1>',
+                        '<h1 id="main">title 2</h1>',
                         '<p>body 2</p>',
                     '</li>',
                     '<li>',
-                        '<section>'
+                        '<section class="red bold">'
                             '<ul>',
                                 '<li>',
                                     '<h3>Level 2</h3>',
@@ -68,7 +84,7 @@ class TestToHTML(unittest.TestCase):
                                 '</li>',
                             '</ul>',
                         '</section>',
-                        '<div>here</div>',
+                        '<div id="here" class="new">here</div>',
                     '</li>',
                 '</ul>'
             ]),
@@ -77,10 +93,10 @@ class TestToHTML(unittest.TestCase):
                     ('h1', 'title 1'), ('p', 'body 1'),
                 ]),
                 OrderedDict([
-                    ('h1', 'title 2'), ('p', 'body 2'),
+                    ('h1#main', 'title 2'), ('p', 'body 2'),
                 ]),
                 OrderedDict([
-                    ('section', [
+                    ('section.red.bold', [
                         OrderedDict([
                             ('h3', 'Level 2'),
                         ]),
@@ -88,7 +104,7 @@ class TestToHTML(unittest.TestCase):
                             ('h3', 'Status:'), ('span', 'Achieved')
                         ]),
                     ]),
-                    ('div', 'here')
+                    ('div#here.new', 'here')
                 ])
             ])
         )

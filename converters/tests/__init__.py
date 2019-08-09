@@ -1,1 +1,1 @@
-from .to_html import TestToHTML
+from .to_html import TestToHTML, TestGetTagProps
