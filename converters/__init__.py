@@ -1,1 +1,1 @@
-from .to_html import dict_to_html
+from .to_html import to_html

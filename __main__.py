@@ -1,6 +1,4 @@
-import converters
-import inputs
+from json2html import convert_code
 
-print(
-    inputs.json_file('source.json', converters.dict_to_html)
-)
+if __name__ == '__main__':
+    convert_code()
