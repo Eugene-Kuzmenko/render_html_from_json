@@ -1,4 +1,31 @@
 from collections import OrderedDict
+import re
+
+tag_props_pattern = re.compile('(?P<type>[.#]|^)(?P<name>.+?)(?=[.#]|$)')
+
+
+def get_tag_props(tag):
+    tag_name = ''
+    tag_id = None
+    tag_classes = []
+    for start, name in tag_props_pattern.findall(tag):
+        if start == '.':
+            tag_classes.append(name)
+        elif start == '#':
+            if not tag_id:
+                tag_id = name
+        else:
+            tag_name = name
+
+    tag_with_attr = tag_name
+
+    if tag_id:
+        tag_with_attr = f'{tag_with_attr} id="{tag_id}"'
+
+    if len(tag_classes) > 0:
+        tag_with_attr = f'{tag_with_attr} class="{" ".join(tag_classes)}"'
+
+    return tag_with_attr, tag_name
 
 
 def get_tag_content(content):
@@ -12,7 +39,8 @@ def get_tag_content(content):
 
 
 def to_tag(item, tag):
-    return f'<{tag}>{get_tag_content(item[tag])}</{tag}>'
+    tag_open, tag_close = get_tag_props(tag)
+    return f'<{tag_open}>{get_tag_content(item[tag])}</{tag_close}>'
 
 
 def to_html(tree):
