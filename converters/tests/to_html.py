@@ -4,9 +4,14 @@ from collections import OrderedDict
 
 
 class TestToHTML(unittest.TestCase):
-    def test_correct(self):
+    def test_correct_1(self):
         self.assertEqual(
-            '<h1>title 1</h1><p>body 1</p><h1>title 2</h1><p>body 2</p>',
+            ''.join([
+                '<ul>',
+                '<li><h1>title 1</h1><p>body 1</p></li>',
+                '<li><h1>title 2</h1><p>body 2</p></li>',
+                '</ul>'
+            ]),
             to_html([
                 OrderedDict([
                     ('h1', 'title 1'), ('p', 'body 1'),
@@ -17,12 +22,15 @@ class TestToHTML(unittest.TestCase):
             ])
         )
 
+    def test_correct_2(self):
         self.assertEqual(
-            '{0}{1}{2}'.format(
-                '<h1>title 2</h1><h2>title 1</h2><span>body 1</span>',
-                '<h1>title 3</h1>',
-                '<header>header 3</header><article>content</article>',
-            ),
+            ''.join([
+                '<ul>',
+                '<li><h1>title 2</h1><h2>title 1</h2><span>body 1</span></li>',
+                '<li><h1>title 3</h1></li>',
+                '<li><header>header 3</header><article>content</article></li>',
+                '</ul>'
+            ]),
             to_html([
                 OrderedDict([
                     ('h1', 'title 2'), ('h2', 'title 1'), ('span', 'body 1'),
@@ -35,7 +43,6 @@ class TestToHTML(unittest.TestCase):
                 ])
             ])
         )
-
 
     def test_not_list(self):
         with self.assertRaises(TypeError) as context:

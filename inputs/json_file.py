@@ -1,6 +1,7 @@
 import json
 from collections import OrderedDict
 
+
 def json_file(filename, converter):
     with open(filename, 'r') as file:
         raw = json.load(
