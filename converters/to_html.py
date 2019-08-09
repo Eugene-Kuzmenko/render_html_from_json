@@ -1,8 +1,8 @@
-def dict_to_html(tree):
+def to_html(tree):
     result = ''
 
     if not isinstance(tree, list):
-        raise TypeError('Source route should be a list')
+        raise TypeError(f'Expected type {type(list())}. Got {type(tree)}')
 
     i = 0
     for item in tree:
