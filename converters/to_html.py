@@ -8,7 +8,10 @@ def to_html(tree):
 
     result = ''
     for item in tree:
+        tags = ''
         for tag in item:
-            result = f'{result}{to_tag(item, tag)}'
+            tags = f'{tags}{to_tag(item, tag)}'
 
-    return result
+        result = f'{result}<li>{tags}</li>'
+
+    return f'<ul>{result}</ul>'
