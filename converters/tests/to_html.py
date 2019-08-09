@@ -20,12 +20,31 @@ class TestGetTagProps(unittest.TestCase):
 
 
 class TestToHTML(unittest.TestCase):
+    def test_html_escape(self):
+        self.assertEqual(
+            ''.join([
+                '<ul>',
+                    '<li><h1>title 1</h1><p>&lt;body 1&gt;</p></li>',
+                    '<li><h1>title 2</h1><&lt;p&gt;>body 2</&lt;p&gt;></li>',
+                '</ul>'
+            ]),
+            to_html([
+                OrderedDict([
+                    ('h1', 'title 1'), ('p', '<body 1>'),
+                ]),
+                OrderedDict([
+                    ('h1', 'title 2'), ('<p>', 'body 2'),
+                ]),
+            ])
+        )
+
+
     def test_correct_1(self):
         self.assertEqual(
             ''.join([
                 '<ul>',
-                '<li><h1>title 1</h1><p>body 1</p></li>',
-                '<li><h1>title 2</h1><p>body 2</p></li>',
+                    '<li><h1>title 1</h1><p>body 1</p></li>',
+                    '<li><h1>title 2</h1><p>body 2</p></li>',
                 '</ul>'
             ]),
             to_html([
@@ -42,9 +61,9 @@ class TestToHTML(unittest.TestCase):
         self.assertEqual(
             ''.join([
                 '<ul>',
-                '<li><h1>title 2</h1><h2>title 1</h2><span>body 1</span></li>',
-                '<li><h1>title 3</h1></li>',
-                '<li><header>header 3</header><article>content</article></li>',
+                    '<li><h1>title 2</h1><h2>title 1</h2><span>body 1</span></li>',
+                    '<li><h1>title 3</h1></li>',
+                    '<li><header>header 3</header><article>content</article></li>',
                 '</ul>'
             ]),
             to_html([

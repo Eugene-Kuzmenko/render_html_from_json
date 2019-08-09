@@ -1,5 +1,6 @@
 from collections import OrderedDict
 import re
+import html
 
 tag_props_pattern = re.compile('(?P<type>[.#]|^)(?P<name>.+?)(?=[.#]|$)')
 
@@ -8,7 +9,7 @@ def get_tag_props(tag):
     tag_name = ''
     tag_id = None
     tag_classes = []
-    for start, name in tag_props_pattern.findall(tag):
+    for start, name in tag_props_pattern.findall(html.escape(tag)):
         if start == '.':
             tag_classes.append(name)
         elif start == '#':
@@ -35,7 +36,7 @@ def get_tag_content(content):
     if isinstance(content, list):
         return to_html(content)
 
-    return content
+    return html.escape(str(content))
 
 
 def to_tag(item, tag):
