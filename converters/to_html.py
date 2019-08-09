@@ -1,5 +1,18 @@
+from collections import OrderedDict
+
+
+def get_tag_content(content):
+    if isinstance(content, OrderedDict):
+        raise TypeError('Tag content can\'t be instance of Dict')
+
+    if isinstance(content, list):
+        return to_html(content)
+
+    return content
+
+
 def to_tag(item, tag):
-    return f'<{tag}>{item[tag]}</{tag}>'
+    return f'<{tag}>{get_tag_content(item[tag])}</{tag}>'
 
 
 def to_html(tree):
