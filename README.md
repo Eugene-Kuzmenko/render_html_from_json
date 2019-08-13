@@ -31,6 +31,10 @@ Example:
 $ python3 json2html.py source.json --dest result.html
 ```
 
+To get output to `stdout`
+```
+$ python3 json2html.py source.json
+```
 
 ### Testing
 ```
