@@ -21,5 +21,11 @@ optional arguments:
 Example:
 
 ```
-$ python3 json2html.py source.json --dest sdf.html
+$ python3 json2html.py source.json --dest result.html
+```
+
+
+### Testing
+```
+python3 -m unittest converters/tests/to_html.py 
 ```
