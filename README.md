@@ -3,6 +3,13 @@
 
 Renderer HTML from JSON files
 
+# Versions
+- [Task 1](https://github.com/Eugene-Kuzmenko/render_html_from_json/tree/feature/task_1) 
+- [Task 2](https://github.com/Eugene-Kuzmenko/render_html_from_json/tree/feature/task_2) 
+- [Task 3](https://github.com/Eugene-Kuzmenko/render_html_from_json/tree/feature/task_3) 
+- [Task 4](https://github.com/Eugene-Kuzmenko/render_html_from_json/tree/feature/task_4) 
+- [Task 5](https://github.com/Eugene-Kuzmenko/render_html_from_json/tree/feature/task_5) 
+
 ## Requirements
 
 For using converver you have to use `Python 3.6` or higher
